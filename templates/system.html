@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}System Administration · ACS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <div class="crumb">ACS / System</div>
+    <h2>System Administration</h2>
+  </div>
+  <div class="flex">
+    <button class="btn btn-ghost" id="btn-refresh-system">⟳ Refresh</button>
+    <a class="btn" href="/admin/" target="_blank" rel="noopener">Django Admin ↗</a>
+  </div>
+</div>
+
+<div class="kpi-grid" id="sys-kpis"></div>
+
+<div class="grid grid-2">
+  <div class="panel">
+    <div class="panel-head"><h3>Health / Readiness</h3></div>
+    <div class="panel-body" id="readiness-panel"><div class="empty">Loading…</div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h3>Workers (heartbeat)</h3></div>
+    <div class="panel-body" id="workers-panel"><div class="empty">Loading…</div></div>
+  </div>
+</div>
+
+<div class="panel mt-12">
+  <div class="panel-head"><h3>System Logs</h3></div>
+  <div id="crud-logs" style="max-height: 340px; overflow: auto;"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/pages/system.js"></script>
+{% endblock %}

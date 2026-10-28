@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Map & Topology · ACS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <div class="crumb">ACS / Map Editor</div>
+    <h2>Map &amp; Topology</h2>
+  </div>
+  <div class="flex">
+    <button class="btn btn-primary" id="btn-add-node">＋ Node</button>
+    <button class="btn" id="btn-connect">Connect edge</button>
+    <button class="btn" id="btn-fit">Fit map</button>
+    <button class="btn" id="btn-grid">▦ Grid</button>
+    <button class="btn" id="btn-import">⇪ Import Map</button>
+  </div>
+</div>
+
+<div class="grid" style="grid-template-columns: 1fr 380px; height: calc(100vh - 175px); min-height: 460px;">
+  <div class="map-wrap" style="height: 100%;">
+    <canvas id="map-canvas"></canvas>
+    <div class="map-toolbar">
+      <button class="map-btn" id="btn-zoom-in" title="Zoom in">+</button>
+      <button class="map-btn" id="btn-zoom-out" title="Zoom out">−</button>
+    </div>
+    <div class="map-scale" id="map-scale"></div>
+    <div class="map-coord" id="map-coord">x: — · y: —</div>
+    <div class="map-legend" id="map-legend"></div>
+    <div class="map-hint" id="map-hint">View mode — use “＋ Node” to add, “Connect edge” to link, drag a node to move it</div>
+  </div>
+
+  <div class="panel" style="height: 100%; display: flex; flex-direction: column; overflow: hidden;">
+    <div class="tabs" id="entity-tabs">
+      <button class="tab-btn active" data-tab="nodes">Node</button>
+      <button class="tab-btn" data-tab="edges">Edge</button>
+      <button class="tab-btn" data-tab="buffers">Buffer</button>
+      <button class="tab-btn" data-tab="zones">Zone</button>
+      <button class="tab-btn" data-tab="zonesets">ZoneSet</button>
+      <button class="tab-btn" data-tab="trafficzones">TrafficZone</button>
+      <button class="tab-btn" data-tab="mapbase">MapBase</button>
+      <button class="tab-btn" data-tab="schedules">Schedule</button>
+      <button class="tab-btn" data-tab="topology">Topology</button>
+      <button class="tab-btn" data-tab="actions">Action</button>
+    </div>
+    <div class="tab-pane active" id="tab-nodes" style="flex: 1; overflow: auto;"><div id="crud-nodes"></div></div>
+    <div class="tab-pane" id="tab-edges" style="flex: 1; overflow: auto;"><div id="crud-edges"></div></div>
+    <div class="tab-pane" id="tab-buffers" style="flex: 1; overflow: auto;"><div id="crud-buffers"></div></div>
+    <div class="tab-pane" id="tab-zones" style="flex: 1; overflow: auto;"><div id="crud-zones"></div></div>
+    <div class="tab-pane" id="tab-zonesets" style="flex: 1; overflow: auto;"><div id="crud-zonesets"></div></div>
+    <div class="tab-pane" id="tab-trafficzones" style="flex: 1; overflow: auto;"><div id="crud-trafficzones"></div></div>
+    <div class="tab-pane" id="tab-mapbase" style="flex: 1; overflow: auto;"><div id="crud-mapbase"></div></div>
+    <div class="tab-pane" id="tab-schedules" style="flex: 1; overflow: auto;"><div id="crud-schedules"></div></div>
+    <div class="tab-pane" id="tab-topology" style="flex: 1; overflow: auto;"><div id="crud-topology"></div></div>
+    <div class="tab-pane" id="tab-actions" style="flex: 1; overflow: auto;"><div id="crud-actions"></div></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/map-engine.js"></script>
+<script src="/static/js/pages/map-editor.js"></script>
+{% endblock %}

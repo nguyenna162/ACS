@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "skills": {
+    "code-review": {
+      "version": "1.0.0",
+      "installedAt": "2026-10-28T16:59:14.351Z",
+      "platform": "junie",
+      "contentHash": "a36edc8e90bf772b3577c3819abc824edca4e5e434b843c23cce91836e91d00c"
+    },
+    "alirezarezvani-senior-frontend": {
+      "version": "1.0.3",
+      "installedAt": "2026-10-28T16:59:40.020Z",
+      "platform": "junie"
+    },
+    "web-research-agent": {
+      "version": "1.0.0",
+      "installedAt": "2026-10-28T16:59:58.826Z",
+      "platform": "junie",
+      "contentHash": "e07bdcc948dae034fc03bbf0716dd6bcf0f28d7029ceddf64fc98010c61a279e"
+    },
+    "refactor": {
+      "version": "1.0.0",
+      "installedAt": "2026-10-28T17:01:16.619Z",
+      "platform": "junie",
+      "contentHash": "718bfd8d8a6b18d4894e23e98f1924d8cf3a09d3e67ca37bd7be0ba6c11847cf"
+    },
+    "alirezarezvani-senior-backend": {
+      "version": "1.0.3",
+      "installedAt": "2026-10-28T17:01:30.901Z",
+      "platform": "junie"
+    },
+    "alirezarezvani-ui-design-system": {
+      "version": "1.0.1",
+      "installedAt": "2026-10-28T17:01:52.548Z",
+      "platform": "junie"
+    }
+  }
+}

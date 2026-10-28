@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}AMR Fleet Management · ACS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <div class="crumb">ACS / Fleet</div>
+    <h2>AMR Fleet Management</h2>
+  </div>
+</div>
+
+<div class="kpi-grid" id="amr-kpis"></div>
+
+<div class="grid" style="grid-template-columns: 1fr 360px;">
+  <div class="panel">
+    <div class="panel-head"><h3>AMR List</h3><button class="btn btn-ghost btn-sm" id="btn-refresh-robots">⟳ Refresh</button></div>
+    <div id="crud-robots"></div>
+  </div>
+  <div class="stack">
+    <div class="panel" style="max-height: 320px; overflow: auto;">
+      <div class="panel-head"><h3 id="telemetry-title">Telemetry — select an AMR</h3></div>
+      <div class="panel-body" id="telemetry-panel"><div class="empty">Select an AMR to view recent telemetry</div></div>
+    </div>
+    <div class="panel" style="max-height: 300px; overflow: auto;">
+      <div class="panel-head"><h3>MQTT Topics</h3></div>
+      <div class="panel-body" id="topics-panel"><div class="empty">Select an AMR to view topics</div></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/pages/amr.js"></script>
+{% endblock %}

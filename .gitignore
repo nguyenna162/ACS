@@ -1,0 +1,30 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+.venv/
+db.sqlite3
+staticfiles/
+
+# Cấu hình & bí mật
+.env
+*.pem
+*.key
+
+# Dữ liệu vận hành
+var/
+Logs/
+media/
+*.log
+
+# Kết quả kiểm thử tạm
+test_out.txt
+check_out.txt
+makemigrations_out.txt
+migrate_out*.txt
+seed_out.txt
+deploy_out.txt
+smoke_out.txt
+db_check.txt
+http_smoke.txt
+core_mig.txt
+final_*.txt

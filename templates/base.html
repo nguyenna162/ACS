@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}ACS · AMR/AGV Fleet Control{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">
+      <span class="brand-logo">ACS</span>
+      <div class="brand-text">
+        <h1>ACS <small>· AMR Fleet Control</small></h1>
+        <p id="instance-name">—</p>
+      </div>
+    </div>
+    <div class="topbar-chips">
+      <span class="chip" id="conn-chip"><span class="dot"></span><b id="conn-label">—</b></span>
+      <span class="chip" id="db-chip"><span class="dot"></span>DB</span>
+      <span class="chip" id="worker-chip"><span class="dot"></span>Worker</span>
+      <span class="chip" id="outbox-chip"><span class="dot"></span>Outbox <b id="outbox-count">0</b></span>
+    </div>
+    <div class="topbar-right">
+      <span class="clock" id="clock">--:--:--</span>
+      <button class="btn btn-icon" id="btn-fullscreen" title="Fullscreen">⛶</button>
+      <button class="btn btn-icon" id="btn-theme" title="Toggle light/dark theme">☾</button>
+    </div>
+  </header>
+
+  <aside id="sidebar">
+    <nav class="nav">
+      <a class="nav-item {% if active == 'dashboard' %}active{% endif %}" href="/"><span class="nav-ic">▦</span><span class="nav-lb">Dashboard</span></a>
+      <a class="nav-item {% if active == 'map' %}active{% endif %}" href="/map/"><span class="nav-ic">⌖</span><span class="nav-lb">Map &amp; Topology</span></a>
+      <a class="nav-item {% if active == 'orders' %}active{% endif %}" href="/orders/"><span class="nav-ic">▤</span><span class="nav-lb">Orders</span></a>
+      <a class="nav-item {% if active == 'amr' %}active{% endif %}" href="/amr/"><span class="nav-ic">◈</span><span class="nav-lb">AMR Fleet</span></a>
+      <a class="nav-item {% if active == 'system' %}active{% endif %}" href="/system/"><span class="nav-ic">⚙</span><span class="nav-lb">System</span></a>
+    </nav>
+    <div class="side-foot">
+      <div class="side-stat"><span class="dot"></span> API <b id="side-api">—</b></div>
+      <a class="side-link" href="/admin/" target="_blank" rel="noopener">Django Admin ↗</a>
+    </div>
+  </aside>
+
+  <div id="shell">
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <footer id="statusbar">
+    <span id="status-left">Ready</span>
+    <span id="status-right"></span>
+  </footer>
+
+  <dialog id="modal" class="modal">
+    <button class="modal-close" aria-label="Close" onclick="closeModal()">×</button>
+    <div id="modal-body"></div>
+  </dialog>
+  <div id="toast-host"></div>
+
+  <script src="/static/js/app.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

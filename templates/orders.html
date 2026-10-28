@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Order Management · ACS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <div class="crumb">ACS / Orders</div>
+    <h2>Order Management</h2>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="tabs" id="order-tabs">
+    <button class="tab-btn active" data-tab="orders">Orders</button>
+    <button class="tab-btn" data-tab="masters">OrderMaster</button>
+    <button class="tab-btn" data-tab="supply">Supply</button>
+    <button class="tab-btn" data-tab="suborders">Sub-Order</button>
+  </div>
+  <div class="tab-pane active" id="tab-orders" style="max-height: calc(100vh - 185px); overflow: auto;"><div id="crud-orders"></div></div>
+  <div class="tab-pane" id="tab-masters" style="max-height: calc(100vh - 185px); overflow: auto;"><div id="crud-masters"></div></div>
+  <div class="tab-pane" id="tab-supply" style="max-height: calc(100vh - 185px); overflow: auto;"><div id="crud-supply"></div></div>
+  <div class="tab-pane" id="tab-suborders" style="max-height: calc(100vh - 185px); overflow: auto;"><div id="crud-suborders"></div></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/pages/orders.js"></script>
+{% endblock %}

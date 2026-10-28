@@ -1,0 +1,22 @@
+# ACS - điều khiển đội xe AMR/AGV (VDA 5050), triển khai native offline.
+# Không cần Docker, không cần Redis.
+Django==5.0.4
+djangorestframework==3.15.1
+channels==4.1.0
+daphne==4.1.2
+psycopg[binary]>=3.2.2
+paho-mqtt==2.0.0
+django-cors-headers==4.3.1
+
+# Broker MQTT Python nội bộ cho dev/offline không cần EMQX/Mosquitto:
+amqtt==0.12.1
+
+# Tùy chọn (không bắt buộc): SciPy tăng tốc Hungarian cho đội xe rất lớn.
+# Hệ thống tự dùng solver thuần Python trong traffic/hungarian.py nếu thiếu.
+# scipy==1.13.1
+
+# Tùy chọn: codec nhị phân cho telemetry băng thông thấp (chưa bật mặc định).
+# ujson==5.10.0
+# cbor2==5.6.5
+# msgpack==1.1.0
+

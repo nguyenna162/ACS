@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Fleet Dashboard · ACS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <div class="crumb">ACS / Dashboard</div>
+    <h2>Fleet Dashboard</h2>
+  </div>
+</div>
+
+<div class="kpi-grid" id="kpis"></div>
+
+<div class="grid" style="grid-template-columns: 1fr 320px; height: calc(100vh - 268px); min-height: 420px;">
+  <div class="map-wrap" style="height: 100%;">
+    <canvas id="map-canvas"></canvas>
+    <div class="map-toolbar">
+      <button class="map-btn" id="btn-zoom-in" title="Zoom in">+</button>
+      <button class="map-btn" id="btn-zoom-out" title="Zoom out">−</button>
+      <button class="map-btn" id="btn-zoom-fit" title="Fit map">⌖</button>
+      <button class="map-btn" id="btn-grid" title="Show/hide grid">▦</button>
+    </div>
+    <div class="map-scale" id="map-scale"></div>
+    <div class="map-coord" id="map-coord">x: — · y: —</div>
+    <div class="map-legend" id="map-legend"></div>
+    <div class="map-hint">Drag to pan · Scroll to zoom · Click an object for details</div>
+  </div>
+
+  <div class="panel" style="height: 100%; display: flex; flex-direction: column; overflow: hidden;">
+    <div class="tabs" id="inspector-tabs">
+      <button class="tab-btn active" data-tab="fleet">Fleet</button>
+      <button class="tab-btn" data-tab="orders">Orders</button>
+      <button class="tab-btn" data-tab="alerts">Alerts</button>
+    </div>
+    <div class="tab-pane active" id="tab-fleet" style="flex: 1; overflow: auto;">
+      <div class="panel-tools">
+        <input type="search" class="search-input" id="fleet-search" placeholder="Search serial / order…" style="flex: 1; min-width: 100px;">
+        <select id="fleet-filter">
+          <option value="">All</option>
+          <option value="IDLE">Idle</option>
+          <option value="RUNNING">Running</option>
+          <option value="BLOCKED">Blocked</option>
+          <option value="WARNING">Warning</option>
+          <option value="ERROR">Error</option>
+          <option value="OFFLINE">Offline</option>
+        </select>
+      </div>
+      <ul class="list" id="fleet-list"></ul>
+    </div>
+    <div class="tab-pane" id="tab-orders" style="flex: 1; overflow: auto;">
+      <div class="panel-tools">
+        <button class="btn btn-primary btn-sm" id="btn-new-order">＋ Transport Order</button>
+        <button class="btn btn-ghost btn-sm" id="btn-refresh-orders" title="Refresh">⟳</button>
+      </div>
+      <ul class="list" id="orders-list"></ul>
+    </div>
+    <div class="tab-pane" id="tab-alerts" style="flex: 1; overflow: auto;">
+      <div class="panel-tools"><button class="btn btn-ghost btn-sm" id="btn-clear-alerts">Clear all</button></div>
+      <ul class="list" id="alerts-list"></ul>
+    </div>
+    <div id="detail-panel" style="border-top: 1px solid var(--border); max-height: 42%; overflow: auto;"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/map-engine.js"></script>
+<script src="/static/js/pages/dashboard.js"></script>
+{% endblock %}
