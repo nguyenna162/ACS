@@ -521,6 +521,40 @@ class JsonFormatter(logging.Formatter):
             return json.dumps({"level": record.levelname, "message": record.getMessage()})
 
 
+class BracketFormatter(logging.Formatter):
+    """Format log chuẩn: ``[time] [LEVEL] [COMPONENT] [SUBJECT] message``.
+
+    - time: ``YYYY-MM-DD HH:MM:SS,mmm`` (có phần nghìn giây)
+    - COMPONENT: module/file phát sinh log (vd ``ACS_ORDER_SEND``)
+    - SUBJECT: tên logger, đoạn cuối (vd ``MQTT_SEND_SUBORDER``)
+    """
+
+    def __init__(self):
+        super().__init__(datefmt="%Y-%m-%d %H:%M:%S")
+
+    def formatTime(self, record, datefmt=None):
+        ct = self.converter(record.created)
+        return f"{time.strftime('%Y-%m-%d %H:%M:%S', ct)},{record.msecs:03.0f}"
+
+    @staticmethod
+    def _tag(value):
+        return str(value).upper().replace(".", "_").replace(" ", "_")
+
+    def format(self, record):
+        component = self._tag(getattr(record, "module", "") or "ROOT")
+        subject = self._tag(record.name.split(".")[-1])
+        head = (
+            "[" + self.formatTime(record) + "] "
+            "[" + record.levelname.upper() + "] "
+            "[" + component + "] "
+            "[" + subject + "]"
+        )
+        message = record.getMessage()
+        if record.exc_info:
+            message = (message + "\n" if message else "") + self.formatException(record.exc_info)
+        return head + " " + message
+
+
 class RequestContextMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response

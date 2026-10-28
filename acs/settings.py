@@ -312,16 +312,17 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "console": {"format": "%(asctime)s %(levelname)-8s %(name)s: %(message)s"},
-        # File log dạng văn bản: thời gian · level · tên logger · nội dung log.
-        "text": {"format": "%(asctime)s %(levelname)-8s %(name)s: %(message)s"},
+        # Định dạng DUY NHẤT cho toàn bộ log:
+        #   [time] [LEVEL] [COMPONENT] [SUBJECT] message
+        "bracket": {"()": "workers.acs_system.BracketFormatter"},
+        # Giữ lại cho nhu cầu log có cấu trúc (parse máy) - không dùng mặc định.
         "json": {"()": "workers.acs_system.JsonFormatter"},
     },
     "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "formatter": "console",
+            "formatter": "bracket",
             "level": LOG_LEVEL,
         },
         "file_app": {
@@ -329,7 +330,7 @@ LOGGING = {
             "filename": str(LOG_DIR / "acs-app.log"),
             "maxBytes": LOG_MAX_BYTES,
             "backupCount": LOG_BACKUP_COUNT,
-            "formatter": "text",
+            "formatter": "bracket",
             "encoding": "utf-8",
             "level": LOG_LEVEL,
         },
@@ -338,7 +339,7 @@ LOGGING = {
             "filename": str(LOG_DIR / "acs-worker.log"),
             "maxBytes": LOG_MAX_BYTES,
             "backupCount": LOG_BACKUP_COUNT,
-            "formatter": "text",
+            "formatter": "bracket",
             "encoding": "utf-8",
             "level": LOG_LEVEL,
         },
@@ -347,7 +348,7 @@ LOGGING = {
             "filename": str(LOG_DIR / "acs-error.log"),
             "maxBytes": LOG_MAX_BYTES,
             "backupCount": LOG_BACKUP_COUNT,
-            "formatter": "text",
+            "formatter": "bracket",
             "encoding": "utf-8",
             "level": "ERROR",
         },
@@ -365,6 +366,12 @@ LOGGING = {
             "propagate": False,
         },
         "django.db.backends": {"level": "WARNING", "propagate": True},
+        # Ép mọi logger Django/Daphne/Twisted đi qua format [bracket],
+        # tránh dòng log thô trùng lặp từ DEFAULT_LOGGING của Django.
+        "django": {"handlers": ["console", "file_app", "file_error", "mail_admins"], "level": LOG_LEVEL, "propagate": False},
+        "django.server": {"handlers": ["console", "file_app", "file_error"], "level": LOG_LEVEL, "propagate": False},
+        "daphne": {"handlers": ["console", "file_app", "file_error"], "level": LOG_LEVEL, "propagate": False},
+        "twisted": {"handlers": ["console", "file_app", "file_error"], "level": LOG_LEVEL, "propagate": False},
         "acs": {"handlers": ["console", "file_app", "file_error"], "level": LOG_LEVEL, "propagate": False},
         "map": {"handlers": ["console", "file_app", "file_error"], "level": LOG_LEVEL, "propagate": False},
         "amr": {"handlers": ["console", "file_app", "file_error"], "level": LOG_LEVEL, "propagate": False},
